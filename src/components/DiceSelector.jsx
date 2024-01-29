@@ -1,16 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components"
 
-const DiceSelector = ({
-    selectedNumber , setSelectedNumber
-}) => {
+const DiceSelector = ({ setError, error, selectedNumber, setSelectedNumber }) => {
 
     const arrayNumber = [1, 2, 3, 4, 5, 6];
 
-    console.log(selectedNumber);
+    const DiceSelectorHandler = (value) => {
+        setSelectedNumber(value)
+        setError("")
+    }
 
     return (
         <NumberBoxes>
+            <h3>{error}</h3>
             <div className="flex">
                 {
                     arrayNumber.map((value, i) => (
@@ -18,8 +20,7 @@ const DiceSelector = ({
                             isSelected={
                                 value == selectedNumber
                             }
-                            key={i} onClick={() => setSelectedNumber(value)
-                            }>
+                            key={i} onClick={() => DiceSelectorHandler(value)}>
                             {value}
                         </Box>
                     ))
@@ -43,6 +44,11 @@ align-items:end;
     display:flex;
     justify-content:end;
     gap:20px;
+}
+
+h3{
+    color:red;
+    font-weight:400;
 }
 
 p{

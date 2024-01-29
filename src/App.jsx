@@ -7,7 +7,7 @@ import GameScreen from './components/GameScreen';
 
 function App() {
 
-  const [ifGameStarted, setIfGameStarted] = useState(true);
+  const [ifGameStarted, setIfGameStarted] = useState(false);
 
   const toggleGame = () => {
     setIfGameStarted((prev) => !prev);

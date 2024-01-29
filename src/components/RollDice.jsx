@@ -1,22 +1,7 @@
-import { useState } from "react";
+
 import styled from "styled-components";
 
-const RollDice = () => {
-
-    const [currentDice, setCurrentDice] = useState(1);
-
-    // generate random number bewtween 1 to 6
-    const generateRandomNumber = (min, max) => {
-
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    // handle roll dice event
-    const roleDice = () => {
-        let num = generateRandomNumber(1, 6);
-        setCurrentDice((prev) => num);
-    }
-
+const RollDice = ({currentDice , roleDice}) => {
 
     return (
         <DiceContainer>
@@ -36,11 +21,11 @@ const DiceContainer = styled.div`
 
 display:flex;
 align-items:center;
-margin-top:50px;
+margin-top:20px;
 flex-direction:column;
 
 
 p{
-    font-size:20px;
+    font-size:24px;
 }
 `;

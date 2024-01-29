@@ -6,20 +6,72 @@ import DiceSelector from "./DiceSelector";
 import RollDice from "./RollDice";
 
 import { useState } from "react";
+import { Button, OppositeButton } from "../styled/Button";
+import Rules from "./Rules";
 
 const GameScreen = () => {
-
+    const [score, setScore] = useState(0);
     const [selectedNumber, setSelectedNumber] = useState();
-     return (
+    const [currentDice, setCurrentDice] = useState(1);
+    const [error, setError] = useState("");
+
+    const [isVisible, setVisible] = useState(false);
+
+    const handleVisible = () => {
+        setVisible(!isVisible);
+    }
+
+
+    // generate random number bewtween 1 to 6
+    const generateRandomNumber = (min, max) => {
+
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // handle roll dice event
+    const roleDice = () => {
+        if (!selectedNumber) {
+            setError("You have not selected any number");
+            return
+        }
+        setError("");
+        let num = generateRandomNumber(1, 6);
+        setCurrentDice((prev) => num);
+
+
+        if (selectedNumber == num) {
+            setScore((prev) => prev + num);
+        } else {
+            setScore((prev) => prev - 2);
+        }
+        setSelectedNumber(undefined);
+    }
+
+    const resetScore = () => {
+        setScore(0);
+    }
+
+
+    return (
         <Main>
             <TopSection>
-                <TotalScore></TotalScore>
-                <DiceSelector selectedNumber={selectedNumber}
-                              setSelectedNumber={setSelectedNumber}
-                 />
+                <TotalScore score={score} />
+                <DiceSelector
+                    error={error}
+                    setError={setError}
+                    selectedNumber={selectedNumber}
+                    setSelectedNumber={setSelectedNumber}
+                />
             </TopSection>
 
-            <RollDice></RollDice>
+            <RollDice currentDice={currentDice}
+                roleDice={roleDice}
+            />
+            <div className="btns">
+                <Button onClick={resetScore}>Reset</Button>
+                <OppositeButton onClick={handleVisible}>Show Rules</OppositeButton>
+            </div>
+            {isVisible && <Rules />}
         </Main>
     )
 }
@@ -34,5 +86,16 @@ align-items:end;
 padding:70px 120px;
 `;
 
-const Main = styled.div``;
+const Main = styled.div`
+.btns{
+
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    align-items:center;
+    padding:20px 0px;
+}
+
+`;
 
