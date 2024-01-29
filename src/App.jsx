@@ -1,0 +1,26 @@
+
+import { useState } from 'react';
+import './App.css'
+import StartGame from './components/startgame';
+import GameScreen from './components/GameScreen';
+
+
+function App() {
+
+  const [ifGameStarted, setIfGameStarted] = useState(true);
+
+  const toggleGame = () => {
+    setIfGameStarted((prev) => !prev);
+  }
+  return (
+    <>
+      {
+        ifGameStarted ? <GameScreen /> : <StartGame
+          toggle={toggleGame}
+        />
+      }
+    </>
+  );
+}
+
+export default App
