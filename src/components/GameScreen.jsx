@@ -40,9 +40,9 @@ const GameScreen = () => {
 
 
         if (selectedNumber == num) {
-            setScore((prev) => prev + num);
+            setScore((prev) => prev + 5);
         } else {
-            setScore((prev) => prev - 2);
+            setScore((prev) => prev - 1);
         }
         setSelectedNumber(undefined);
     }
