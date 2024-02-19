@@ -14,6 +14,7 @@ border:none;
 border:1px solid transparent;
 transition: 0.4ss ease-in;
 cursor:pointer;
+margin:20px 0;
 
 &:hover{
     background-color:white;
